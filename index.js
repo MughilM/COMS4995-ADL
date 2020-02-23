@@ -10,7 +10,7 @@ const MODEL_PATH =
 
 const IMAGE_SIZE_WIDTH = 540;
 const IMAGE_SIZE_HEIGHT = 960;
-const TOPK_PREDICTIONS = 5;
+const TOPK_PREDICTIONS = 4;
 
 let my_model;
 const demo = async () => {
