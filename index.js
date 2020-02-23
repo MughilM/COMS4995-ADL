@@ -1,15 +1,15 @@
 CLASSES = {
-  0: 'class0',
-  1: 'class1',
-  2: 'class2',
-  3: 'class3',
-  4: 'class4',
+  0: 'Law Blob',
+  1: 'Law Eyeball',
+  2: 'Mudd Statue',
+  3: 'Uris Statue'
 };
 
 const MODEL_PATH =
     'model.json';
 
-const IMAGE_SIZE = 192;
+const IMAGE_SIZE_WIDTH = 540;
+const IMAGE_SIZE_HEIGHT = 960;
 const TOPK_PREDICTIONS = 5;
 
 let my_model;
@@ -21,7 +21,7 @@ const demo = async () => {
   // Warmup the model. This isn't necessary, but makes the first prediction
   // faster. Call `dispose` to release the WebGL memory allocated for the return
   // value of `predict`.
-  my_model.predict(tf.zeros([1, IMAGE_SIZE, IMAGE_SIZE, 3])).dispose();
+  my_model.predict(tf.zeros([1, IMAGE_SIZE_HEIGHT, IMAGE_SIZE_WIDTH, 3])).dispose();
 
   status('');
 
@@ -63,7 +63,7 @@ async function predict(imgElement) {
     const normalized = img.div(255.0);
 
     // Reshape to a single-element batch so we can pass it to predict.
-    const batched = normalized.reshape([1, IMAGE_SIZE, IMAGE_SIZE, 3]);
+    const batched = normalized.reshape([1, IMAGE_SIZE_HEIGHT, IMAGE_SIZE_WIDTH, 3]);
 
     startTime2 = performance.now();
     // Make a prediction through my_model.
@@ -165,8 +165,8 @@ filesElement.addEventListener('change', evt => {
       // Fill the image & call predict.
       let img = document.createElement('img');
       img.src = e.target.result;
-      img.width = IMAGE_SIZE;
-      img.height = IMAGE_SIZE;
+      img.width = IMAGE_SIZE_WIDTH;
+      img.height = IMAGE_SIZE_HEIGHT;
       img.onload = () => predict(img);
     };
 
